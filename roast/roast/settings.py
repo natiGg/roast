@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication',
+    'core',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -73,11 +76,16 @@ WSGI_APPLICATION = 'roast.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'roast',
+      'USER':'postgres',
+      'PASSWORD':'nG#trialG',
+      'HOST':'localhost',
+      'PORT':'5432'
+   }
 }
 
 
@@ -118,3 +126,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+DEFAULT_AUTO_FIELD='django.db.models.BigAutoField' 
