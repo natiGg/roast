@@ -13,7 +13,8 @@ class Level(models.Model):
         ('spectator', 'spectator'),
     )
     type = models.CharField(max_length=50, choices=LEVEL_CHOICES,default=LEVEL_CHOICES[4][0])
-   
+    def __str__(self):
+        return u"%s" % (self.type)   
 
 class Reaction(models.Model):
     
@@ -42,7 +43,7 @@ class Roast(models.Model):
  
 class UserProfile(models.Model):
 
-    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,blank=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     first_name = models.CharField(max_length=50,unique=False)
     last_name = models.CharField(max_length=10, unique=False)
@@ -56,6 +57,11 @@ class UserProfile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     level = models.ForeignKey(Level,on_delete=models.CASCADE,related_name='level')
     bio = models.CharField(max_length=250,unique=False)
+    class Meta:
+        '''
+        to set table name in database
+        '''
+        db_table = "profile"
 
 class Comment(models.Model):
     id = models.IntegerField(primary_key=True,unique=True,blank=False)
